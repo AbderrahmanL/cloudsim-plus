@@ -125,7 +125,7 @@ public class NetworkHost extends HostSimple {
     /**
      * Receives packets and forwards them to targeting VMs and respective Cloudlets.
      */
-    private void receivePackets() {
+    protected void receivePackets() {
         for (final HostPacket hostPkt : hostPktsReceived) {
             final Vm destinationVm = receiveVmPacket(hostPkt);
             //Checks if the destinationVm is inside this host
@@ -226,7 +226,7 @@ public class NetworkHost extends HostSimple {
         return numberOfPackets == 0 ? bandwidth : bandwidth / numberOfPackets;
     }
 
-    private CloudletTaskScheduler getVmPacketScheduler(Vm vm) {
+    protected CloudletTaskScheduler getVmPacketScheduler(Vm vm) {
         return vm.getCloudletScheduler().getTaskScheduler();
     }
 
@@ -323,4 +323,10 @@ public class NetworkHost extends HostSimple {
     public void setBandwidth(final double bandwidth) {
         this.bandwidth = bandwidth;
     }
+
+	public List<HostPacket> getHostPktsReceived() {
+		return hostPktsReceived;
+	}
+    
+    
 }
